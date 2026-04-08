@@ -34,7 +34,7 @@ class VehicleTeleop(Node):
         self.current_steering = 0.0
 
         # Timer: print joint states every 2 sec
-        self.print_timer = self.create_timer(2.0, self.print_joint_states)
+        # self.print_timer = self.create_timer(2.0, self.print_joint_states)
 
         # Timer: publish commands at 10 Hz
         self.command_timer = self.create_timer(0.1, self.publish_commands)

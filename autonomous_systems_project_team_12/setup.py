@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'Autonomous_Systems_Project_Team_12'
+package_name = 'autonomous_systems_project_team_12'
 
 setup(
     name=package_name,
@@ -24,10 +24,10 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            "Validation_Printing_Node_Team_12 = Autonomous_Systems_Project_Team_12.Validation_Printing_Node_Team_12:main",
-            "Testing_Node = Autonomous_Systems_Project_Team_12.Testing_Node:main",
-            "teleop_vehicle_controller = Autonomous_Systems_Project_Team_12.teleop_vehicle_controller:main",
-            "teleop_press_hold_node = Autonomous_Systems_Project_Team_12.teleop_press_hold_node:main",
+            "Validation_Printing_Node_Team_12 = autonomous_systems_project_team_12.Validation_Printing_Node_Team_12:main",
+            "Testing_Node = autonomous_systems_project_team_12.Testing_Node:main",
+            "teleop_vehicle_controller = autonomous_systems_project_team_12.teleop_vehicle_controller:main",
+            "teleop_press_hold_node = autonomous_systems_project_team_12.teleop_press_hold_node:main",
         ],
     },
 )

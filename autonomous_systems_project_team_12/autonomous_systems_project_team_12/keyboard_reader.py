@@ -12,8 +12,8 @@ class keyboardReader(Node):
         self.vel_pub = self.create_publisher(Float64, '/velocity', 10)
         self.steer_pub = self.create_publisher(Float64, '/steering_angle', 10)
 
-        self.vel_value = 10.0
-        self.steer_value = 0.5
+        self.vel_value = 1.0
+        self.steer_value = 1.0
 
         self.pressed_keys = set()
 

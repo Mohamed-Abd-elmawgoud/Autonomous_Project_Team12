@@ -26,7 +26,6 @@ setup(
         'console_scripts': [
             "Validation_Printing_Node_Team_12 = autonomous_systems_project_team_12.Validation_Printing_Node_Team_12:main",
             "olr_node = autonomous_systems_project_team_12.olr_node:main",
-            "teleop_vehicle_controller = autonomous_systems_project_team_12.teleop_vehicle_controller:main",
             "keyboard_reader = autonomous_systems_project_team_12.keyboard_reader:main",
             "vehicle_state = autonomous_systems_project_team_12.vehicle_state:main",
         ],

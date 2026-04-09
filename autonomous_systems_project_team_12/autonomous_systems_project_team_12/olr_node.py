@@ -1,8 +1,8 @@
 import rclpy
 from rclpy.node import Node
-
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
+from rcl_interfaces.msg import SetParametersResult
 
 
 class OLRNode(Node):
@@ -10,7 +10,6 @@ class OLRNode(Node):
     def __init__(self):
         super().__init__('olr_node')
 
-        # Subscriber to joint states
         self.joint_sub = self.create_subscription(
             JointState,
             '/joint_states',
@@ -18,39 +17,42 @@ class OLRNode(Node):
             10
         )
 
-        # Publishers
-        self.velocity_pub = self.create_publisher(Float64, '/velocity', 10)
+        self.velocity_pub = self.create_publisher(Float64, '/velocity',       10)
         self.steering_pub = self.create_publisher(Float64, '/steering_angle', 10)
 
-        # Store latest joint state
         self.latest_joint_state = None
 
-        # Motion commands (constant for circular motion)
-        self.velocity = 10.0
-        self.steering_angle = 0.5
+        # ── Read from ROS parameters ──────────────────────────────────────
+        self.declare_parameter('velocity',       1.5)
+        self.declare_parameter('steering_angle', 0.8)
 
-        # Timer for printing joint states (every 3 seconds)
-        # self.print_timer = self.create_timer(3.0, self.print_joint_states)
+        self.velocity       = self.get_parameter('velocity').value
+        self.steering_angle = self.get_parameter('steering_angle').value
 
-        # Timer for publishing commands (every 0.1 seconds)
+        self.get_logger().info(
+            f'OLR Node started — velocity={self.velocity}  '
+            f'steering={self.steering_angle}'
+        )
+
         self.command_timer = self.create_timer(0.1, self.publish_commands)
 
-        self.get_logger().info("Circular Vehicle Controller started")
+        # ── Watch for parameter changes ───────────────────────────────────────
+        self.add_on_set_parameters_callback(self._param_callback)
 
     def joint_callback(self, msg):
         self.latest_joint_state = msg
 
-    def print_joint_states(self):
-        if self.latest_joint_state is not None:
-            positions = self.latest_joint_state.position
-            velocities = self.latest_joint_state.velocity
-            self.get_logger().info(f'Joint positions: {positions}')
-            self.get_logger().info(f'Joint velocities: {velocities}')
-        else:
-            self.get_logger().info("Waiting for joint states...")
+    def _param_callback(self, params):
+        for param in params:
+            if param.name == 'velocity':
+                self.velocity = param.value
+                self.get_logger().info(f'Velocity updated to {self.velocity}')
+            elif param.name == 'steering_angle':
+                self.steering_angle = param.value
+                self.get_logger().info(f'Steering updated to {self.steering_angle}')
+        return SetParametersResult(successful=True)
 
     def publish_commands(self):
-
         vel_msg = Float64()
         vel_msg.data = self.velocity
         self.velocity_pub.publish(vel_msg)
@@ -62,13 +64,14 @@ class OLRNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-
     node = OLRNode()
-
-    rclpy.spin(node)
-
-    node.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == '__main__':

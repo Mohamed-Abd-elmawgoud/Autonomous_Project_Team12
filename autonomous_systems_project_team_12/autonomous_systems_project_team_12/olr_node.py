@@ -5,10 +5,10 @@ from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64
 
 
-class CircularVehicleController(Node):
+class OLRNode(Node):
 
     def __init__(self):
-        super().__init__('circular_vehicle_controller')
+        super().__init__('olr_node')
 
         # Subscriber to joint states
         self.joint_sub = self.create_subscription(
@@ -26,11 +26,11 @@ class CircularVehicleController(Node):
         self.latest_joint_state = None
 
         # Motion commands (constant for circular motion)
-        self.velocity = 2.0
-        self.steering_angle = 0.3
+        self.velocity = 10.0
+        self.steering_angle = 0.5
 
-        # Timer for printing joint states (every 2 seconds)
-        self.print_timer = self.create_timer(2.0, self.print_joint_states)
+        # Timer for printing joint states (every 3 seconds)
+        # self.print_timer = self.create_timer(3.0, self.print_joint_states)
 
         # Timer for publishing commands (every 0.1 seconds)
         self.command_timer = self.create_timer(0.1, self.publish_commands)
@@ -43,7 +43,9 @@ class CircularVehicleController(Node):
     def print_joint_states(self):
         if self.latest_joint_state is not None:
             positions = self.latest_joint_state.position
+            velocities = self.latest_joint_state.velocity
             self.get_logger().info(f'Joint positions: {positions}')
+            self.get_logger().info(f'Joint velocities: {velocities}')
         else:
             self.get_logger().info("Waiting for joint states...")
 
@@ -61,7 +63,7 @@ class CircularVehicleController(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    node = CircularVehicleController()
+    node = OLRNode()
 
     rclpy.spin(node)
 

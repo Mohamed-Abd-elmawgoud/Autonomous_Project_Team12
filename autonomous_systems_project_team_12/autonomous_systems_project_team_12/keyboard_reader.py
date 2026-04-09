@@ -5,9 +5,9 @@ from std_msgs.msg import Float64
 from pynput import keyboard
 
 
-class TeleopNode(Node):
+class keyboardReader(Node):
     def __init__(self):
-        super().__init__('teleop_node')
+        super().__init__('keyboard_reader')
 
         self.vel_pub = self.create_publisher(Float64, '/velocity', 10)
         self.steer_pub = self.create_publisher(Float64, '/steering_angle', 10)
@@ -71,7 +71,7 @@ class TeleopNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = TeleopNode()
+    node = keyboardReader()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

@@ -56,9 +56,9 @@ class keyboardReader(Node):
 
         steering = 0.0
         if 'a' in self.pressed_keys:
-            steering += self.steer_value
-        if 'd' in self.pressed_keys:
             steering -= self.steer_value
+        if 'd' in self.pressed_keys:
+            steering += self.steer_value
 
         vel_msg = Float64()
         vel_msg.data = velocity

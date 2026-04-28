@@ -16,7 +16,7 @@ class StanleyController(Node):
         self.declare_parameter("k_p", 1.0)
         self.declare_parameter("max_steering", 0.6108)
         self.declare_parameter("target_lateral_pos", 1.0)
-        self.declare_parameter("lane_heading", 0.0)
+        self.declare_parameter("lane_heading", 3.14159 )
 
         self.k_p = self.get_parameter("k_p").value
         self.max_steering = self.get_parameter("max_steering").value
@@ -56,13 +56,15 @@ class StanleyController(Node):
     # STANLEY CONTROL
     # =========================================================
     def compute(self):
-
-        # ---------------- SPEED SAFETY ----------------
-        v = abs(self.speed)  # IMPORTANT FIX (removes reverse issues)
+        v = abs(self.speed)
         v = max(0.5, v)
 
         # ---------------- CROSS TRACK ERROR ----------------
         cte = self.target_lateral_pos - self.y
+
+        # When facing -X, left/right is flipped in world frame
+        if abs(self.lane_heading - math.pi) < 0.1:
+            cte = -cte
 
         # ---------------- HEADING ERROR ----------------
         heading_error = self.lane_heading - self.yaw
@@ -72,19 +74,14 @@ class StanleyController(Node):
         stanley = math.atan2(self.k_p * cte, v)
 
         steer = heading_error + stanley
-
-        # clamp
         steer = max(-self.max_steering, min(self.max_steering, steer))
 
-        # ---------------- OUTPUT ----------------
         msg = Float64()
         msg.data = steer
         self.pub.publish(msg)
 
-        # ---------------- DEBUG ----------------
         # self.get_logger().info(
-        #     f"[STANLEY] y={self.y:.2f} "
-        #     f"cte={cte:.2f} "
+        #     f"[STANLEY] y={self.y:.2f} cte={cte:.2f} "
         #     f"yaw={math.degrees(self.yaw):.1f} "
         #     f"steer={math.degrees(steer):.1f}"
         # )

@@ -29,7 +29,17 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
         self.Ki = 0.1
         self.Kd = 0.05
 
-        self.desired_velocity = 2.0  # m/s
+        # 1. Declare the parameter (name, default_value)
+        # This allows the launch file to override the default 2.0
+        self.declare_parameter('desired_velocity', 2.0)
+
+        # 2. Retrieve the parameter value
+        self.desired_velocity = self.get_parameter('desired_velocity').value
+
+        # Add this — you'll see it in the terminal on startup
+        self.get_logger().info(f'desired_velocity set to: {self.desired_velocity}')
+
+        
         self.sample_time = 0.1       # seconds (matches 10 Hz timer)
 
         # --- PID State Variables ---

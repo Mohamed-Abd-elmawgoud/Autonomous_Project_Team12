@@ -82,12 +82,12 @@ class StanleyController(Node):
         self.pub.publish(msg)
 
         # ---------------- DEBUG ----------------
-        self.get_logger().info(
-            f"[STANLEY] y={self.y:.2f} "
-            f"cte={cte:.2f} "
-            f"yaw={math.degrees(self.yaw):.1f} "
-            f"steer={math.degrees(steer):.1f}"
-        )
+        # self.get_logger().info(
+        #     f"[STANLEY] y={self.y:.2f} "
+        #     f"cte={cte:.2f} "
+        #     f"yaw={math.degrees(self.yaw):.1f} "
+        #     f"steer={math.degrees(steer):.1f}"
+        # )
 
 
 def main():

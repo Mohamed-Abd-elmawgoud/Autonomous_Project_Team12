@@ -28,6 +28,8 @@ setup(
             "olr_node = autonomous_systems_project_team_12.olr_node:main",
             "keyboard_reader = autonomous_systems_project_team_12.keyboard_reader:main",
             "vehicle_state = autonomous_systems_project_team_12.vehicle_state:main",
+            'Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12 = autonomous_systems_project_team_12.Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12:main',
+            'Autonomous_Systems_MS_3_CLR_Alg_2_Lateral_Team_12 = autonomous_systems_project_team_12.Autonomous_Systems_MS_3_CLR_Alg_2_Lateral_Team_12:main',
         ],
     },
 )

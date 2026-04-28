@@ -1,3 +1,4 @@
+### CORECT CODE BELOW 
 #!/usr/bin/env python3
 
 import rclpy
@@ -25,9 +26,22 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
             self.joint_states_callback,
             10
         )
-        self.Kp = 3.0  # Proportional gain for the controller
+        #self.Kp = 1.0  # Proportional gain for the controller
+
+        self.WHEEL_RADIUS = 0.3  # meters, from URDF
+
+        # --- PID Parameters ---
+        self.Kp = 1.5   # Proportional gain
+        self.Ki = 0.1   # Integral gain
+        self.Kd = 0.05  # Derivative gain
+
         self.desired_velocity = 2.0  # Desired velocity (m/s)
         self.sample_time = 0.1  # Sample time (s)
+
+        # --- PID State Variables ---
+        self.integral_error = 0.0
+        self.prev_error = 0.0
+        self.rear_wheel_velocity = 0.0
 
         # Timer: publish at 10 Hz
         self.timer = self.create_timer(0.1, self.timer_callback)
@@ -56,9 +70,9 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
             #self.rear_wheel_velocity = (vel_left + vel_right) / 2.0
             self.rear_wheel_velocity = ((vel_left + vel_right) / 2.0) * 0.3  # rad/s → m/s
 
-            # self.get_logger().info(
-            #     f'avg: {self.rear_wheel_velocity:.3f} m/s'
-            # )
+            self.get_logger().info(
+                f'Rear wheel velocities — left: {vel_left:.3f} rad/s, right: {vel_right:.3f} rad/s, avg: {self.rear_wheel_velocity:.3f} m/s'
+            )
         else:
             self.get_logger().warn('Rear wheel joints not found in JointState message.')
 
@@ -66,13 +80,40 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
         """Publishes the average rear wheel angular velocity (rad/s) on /velocity at 10 Hz."""
         msg = Float64()
         
-        velocity_curr = self.rear_wheel_velocity
-        accel = self.Kp * (velocity_curr - self.desired_velocity)
+        # velocity_curr = self.rear_wheel_velocity
+        # accel = self.Kp * (self.desired_velocity - velocity_curr)
 
-        velocity_cmd = velocity_curr + accel * self.sample_time
-        msg.data = velocity_cmd
+        # velocity_cmd = velocity_curr + accel * self.sample_time
+        # msg.data = velocity_cmd
 
+        # 1. Calculate current error
+        error = self.desired_velocity - self.rear_wheel_velocity
+        
+        # 2. Proportional term
+        P_out = self.Kp * error
+        
+        # 3. Integral term (accumulated error over time)
+        self.integral_error += ((error + self.prev_error)/2) * self.sample_time
+        I_out = self.Ki * self.integral_error
+        
+        # 4. Derivative term (change in error)
+        derivative = (error - self.prev_error) / self.sample_time
+        D_out = self.Kd * derivative
+
+        
+        # 5. Total control signal (Acceleration/Command Adjustment)
+        accel_cmd = P_out + I_out + D_out
+        
+        # Update command based on current state + PID adjustment
+        velocity_cmd = self.rear_wheel_velocity + (accel_cmd * self.sample_time)
+
+          # ✅ Convert to rad/s before sending to the controller
+        velocity_cmd_rads = velocity_cmd / self.WHEEL_RADIUS
+
+        msg.data = velocity_cmd_rads
         self.velocity_publisher.publish(msg)
+
+        self.prev_error = error
         self.get_logger().debug(f'Published velocity: {msg.data}')
 
 
@@ -92,3 +133,7 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
+
+##### CORRECT CODE ENDS HERE    
+

@@ -23,6 +23,13 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
             self.odom_callback,
             10
         )
+         # Subscriber: odometry — gives body_link speed in m/s directly
+        self.desired_velocity_subscriber = self.create_subscription(
+            Float64,
+            "/desired_velocity",
+            self.desired_velocity_callback,
+            10
+        )
 
         # --- PID Parameters ---
         self.Kp = 1.5
@@ -31,13 +38,13 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
 
         # 1. Declare the parameter (name, default_value)
         # This allows the launch file to override the default 2.0
-        self.declare_parameter('desired_velocity', 2.0)
+        # self.declare_parameter('desired_velocity', 2.0)
 
         # 2. Retrieve the parameter value
-        self.desired_velocity = self.get_parameter('desired_velocity').value
+        # self.desired_velocity = self.get_parameter('desired_velocity').value
 
         # Add this — you'll see it in the terminal on startup
-        self.get_logger().info(f'desired_velocity set to: {self.desired_velocity}')
+        # self.get_logger().info(f'desired_velocity set to: {self.desired_velocity}')
 
         
         self.sample_time = 0.1       # seconds (matches 10 Hz timer)
@@ -46,7 +53,8 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
         self.integral_error = 0.0
         self.prev_error = 0.0
         self.current_velocity = 0.0  # m/s, updated by odometry
-
+        # Inside __init__ of the Speed Controller node
+        self.desired_velocity = 0.0
         # Timer: publish at 10 Hz
         self.timer = self.create_timer(self.sample_time, self.timer_callback)
 
@@ -59,6 +67,8 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
         self.get_logger().info(
             f'Odometry speed: {self.current_velocity:.3f} m/s'
         )
+    def desired_velocity_callback(self, msg: Float64):
+        self.desired_velocity = msg.data
 
     def timer_callback(self):
         """PID controller: computes velocity command and publishes in rad/s."""

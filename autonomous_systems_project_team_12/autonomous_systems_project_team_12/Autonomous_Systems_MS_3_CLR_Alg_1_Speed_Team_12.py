@@ -53,6 +53,7 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
         self.integral_error = 0.0
         self.prev_error = 0.0
         self.current_velocity = 0.0  # m/s, updated by odometry
+        self.current_x = 0.0
         # Inside __init__ of the Speed Controller node
         self.desired_velocity = 0.0
         # Timer: publish at 10 Hz
@@ -63,6 +64,7 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
     def odom_callback(self, msg: Odometry):
         """Read the vehicle's linear speed directly from odometry (m/s)."""
         self.current_velocity = msg.twist.twist.linear.x
+        self.current_x = msg.pose.pose.position.x
 
         self.get_logger().info(
             f'Odometry speed: {self.current_velocity:.3f} m/s'
@@ -92,6 +94,9 @@ class Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12(Node):
 
         # 6. New desired speed in m/s
         velocity_cmd_ms = self.current_velocity + (accel_cmd * self.sample_time)
+
+        if self.current_x >= 10.0:
+            velocity_cmd_ms = 0.0
 
         # 7. Convert m/s → rad/s for the wheel velocity controller
         #velocity_cmd_rads = velocity_cmd_ms / self.WHEEL_RADIUS

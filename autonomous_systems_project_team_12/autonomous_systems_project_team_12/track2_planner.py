@@ -4,10 +4,10 @@ from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 
 
-class track1_planner(Node):
+class track2_planner(Node):
 
     def __init__(self):
-        super().__init__('track1_planner')
+        super().__init__('track2_planner')
 
         # Publisher: /velocity (rad/s to the wheel controller)
         self.desired_velocity_publisher = self.create_publisher(
@@ -52,21 +52,21 @@ class track1_planner(Node):
         self.current_x = msg.pose.pose.position.x
 
         self.get_logger().info(
-            f'Odometry position: ({self.current_x:.3f}, {self.current_y:.3f}), speed: {self.current_velocity:.3f} m/s'
+            f'Odometry position: ({self.current_x:.3f}'
         )
 
     def timer_callback(self):
         if self.current_x >= 0.0 and self.current_x < 3.0:
             # self.desired_velocity = 2.0
             self.desired_lane = 0.1875
-        elif self.current_x >= 3.0 and self.current_x < 4.2:
-            self.desired_velocity = 1.0
+        elif self.current_x >= 1.5 and self.current_x < 4.2:
+            self.desired_velocity = 0.1
             self.desired_lane = -0.1875
-        elif self.current_x >= 4.2 and self.current_x < 7.0:
+        elif self.current_x >= 4.2 and self.current_x < 6.5:
             # self.desired_velocity = 2.0
             self.desired_lane = -0.1875
-        elif self.current_x >= 7.0 and self.current_x < 8.2:
-            self.desired_velocity = 1.0
+        elif self.current_x >= 6.5 and self.current_x < 8.2:
+            self.desired_velocity = 0.1
             self.desired_lane = 0.1875
         elif self.current_x >= 8.2 and self.current_x < 10.0:
             # self.desired_velocity = 2.0
@@ -87,7 +87,7 @@ class track1_planner(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = track1_planner()
+    node = track2_planner()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:

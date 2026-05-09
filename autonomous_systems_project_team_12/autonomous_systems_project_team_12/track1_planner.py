@@ -31,12 +31,12 @@ class track1_planner(Node):
         )
 
          # This allows the launch file to override the default 2.0
-        # self.declare_parameter('desired_velocity', 2.0)
+        self.declare_parameter('desired_velocity', 2.0)
 
-        # # 2. Retrieve the parameter value
-        # self.desired_velocity = self.get_parameter('desired_velocity').value
+        # 2. Retrieve the parameter value
+        self.desired_velocity = self.get_parameter('desired_velocity').value
            # This allows the launch file to override the default 2.0
-        self.desired_velocity = 2.0
+        #self.desired_velocity = 2.0
         self.desired_lane = 0.0
         self.current_x = 0.0
 

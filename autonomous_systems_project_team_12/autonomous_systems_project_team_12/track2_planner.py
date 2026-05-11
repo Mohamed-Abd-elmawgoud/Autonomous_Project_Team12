@@ -56,22 +56,22 @@ class track2_planner(Node):
         )
 
     def timer_callback(self):
-        if self.current_x >= 0.0 and self.current_x < 3.0:
-            # self.desired_velocity = 2.0
+        if self.current_x >= 0.0 and self.current_x < 1.5:
+            self.desired_velocity = 2.0
             self.desired_lane = 0.1875
         elif self.current_x >= 1.5 and self.current_x < 4.2:
             self.desired_velocity = 0.1
             self.desired_lane = -0.1875
-        elif self.current_x >= 4.2 and self.current_x < 6.5:
-            # self.desired_velocity = 2.0
+        elif self.current_x >= 4.2 and self.current_x < 6.0:
+            self.desired_velocity = 2.0
             self.desired_lane = -0.1875
-        elif self.current_x >= 6.5 and self.current_x < 8.2:
+        elif self.current_x >= 6.0 and self.current_x < 8.2:
             self.desired_velocity = 0.1
             self.desired_lane = 0.1875
-        elif self.current_x >= 8.2 and self.current_x < 10.0:
-            # self.desired_velocity = 2.0
+        elif self.current_x >= 8.2 and self.current_x < 9.5:
+            self.desired_velocity = 2.0
             self.desired_lane = 0.1875
-        elif self.current_x >= 10.0:
+        elif self.current_x >= 9.5:
             self.desired_velocity = 0.0
             self.desired_lane = 0.1875    
 

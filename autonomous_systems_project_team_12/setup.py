@@ -31,7 +31,10 @@ setup(
             'Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12 = autonomous_systems_project_team_12.Autonomous_Systems_MS_3_CLR_Alg_1_Speed_Team_12:main',
             'Autonomous_Systems_MS_3_CLR_Alg_2_Lateral_Team_12 = autonomous_systems_project_team_12.Autonomous_Systems_MS_3_CLR_Alg_2_Lateral_Team_12:main',
             'track1_planner = autonomous_systems_project_team_12.track1_planner:main',
-            'track2_planner = autonomous_systems_project_team_12.track2_planner:main'
+            'track2_planner = autonomous_systems_project_team_12.track2_planner:main',
+            'track3_planner = autonomous_systems_project_team_12.track3_planner:main',
+            'PointToPoint_control = autonomous_systems_project_team_12.PointToPoint_control:main',
+            'lateral_control_track3 = autonomous_systems_project_team_12.lateral_control_track3:main'
         ],
     },
 )

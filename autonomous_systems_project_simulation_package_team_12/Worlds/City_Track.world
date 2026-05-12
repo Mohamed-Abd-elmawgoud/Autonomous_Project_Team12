@@ -1,0 +1,900 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="city_track">
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="outer_top">
+      <static>true</static>
+      <pose>2.5000 2.0000 0.150 0 0 0.0000</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>4.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>4.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_bottom">
+      <static>true</static>
+      <pose>2.5000 -2.0000 0.150 0 0 0.0000</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>4.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>4.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_left">
+      <static>true</static>
+      <pose>0.0000 0.0000 0.150 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_right">
+      <static>true</static>
+      <pose>5.0000 0.0000 0.150 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_0">
+      <static>true</static>
+      <pose>0.4510 1.9976 0.150 0 0 3.2398</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_1">
+      <static>true</static>
+      <pose>0.3549 1.9785 0.150 0 0 3.4361</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_2">
+      <static>true</static>
+      <pose>0.2643 1.9410 0.150 0 0 3.6325</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_3">
+      <static>true</static>
+      <pose>0.1828 1.8865 0.150 0 0 3.8288</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_4">
+      <static>true</static>
+      <pose>0.1135 1.8172 0.150 0 0 4.0252</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_5">
+      <static>true</static>
+      <pose>0.0590 1.7357 0.150 0 0 4.2215</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_6">
+      <static>true</static>
+      <pose>0.0215 1.6451 0.150 0 0 4.4179</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tl_7">
+      <static>true</static>
+      <pose>0.0024 1.5490 0.150 0 0 4.6142</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_0">
+      <static>true</static>
+      <pose>4.9976 1.5490 0.150 0 0 1.6690</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_1">
+      <static>true</static>
+      <pose>4.9785 1.6451 0.150 0 0 1.8653</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_2">
+      <static>true</static>
+      <pose>4.9410 1.7357 0.150 0 0 2.0617</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_3">
+      <static>true</static>
+      <pose>4.8865 1.8172 0.150 0 0 2.2580</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_4">
+      <static>true</static>
+      <pose>4.8172 1.8865 0.150 0 0 2.4544</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_5">
+      <static>true</static>
+      <pose>4.7357 1.9410 0.150 0 0 2.6507</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_6">
+      <static>true</static>
+      <pose>4.6451 1.9785 0.150 0 0 2.8471</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_tr_7">
+      <static>true</static>
+      <pose>4.5490 1.9976 0.150 0 0 3.0434</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_0">
+      <static>true</static>
+      <pose>0.0024 -1.5490 0.150 0 0 4.8106</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_1">
+      <static>true</static>
+      <pose>0.0215 -1.6451 0.150 0 0 5.0069</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_2">
+      <static>true</static>
+      <pose>0.0590 -1.7357 0.150 0 0 5.2033</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_3">
+      <static>true</static>
+      <pose>0.1135 -1.8172 0.150 0 0 5.3996</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_4">
+      <static>true</static>
+      <pose>0.1828 -1.8865 0.150 0 0 5.5960</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_5">
+      <static>true</static>
+      <pose>0.2643 -1.9410 0.150 0 0 5.7923</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_6">
+      <static>true</static>
+      <pose>0.3549 -1.9785 0.150 0 0 5.9887</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_bl_7">
+      <static>true</static>
+      <pose>0.4510 -1.9976 0.150 0 0 6.1850</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_0">
+      <static>true</static>
+      <pose>4.5490 -1.9976 0.150 0 0 6.3814</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_1">
+      <static>true</static>
+      <pose>4.6451 -1.9785 0.150 0 0 6.5777</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_2">
+      <static>true</static>
+      <pose>4.7357 -1.9410 0.150 0 0 6.7741</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_3">
+      <static>true</static>
+      <pose>4.8172 -1.8865 0.150 0 0 6.9704</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_4">
+      <static>true</static>
+      <pose>4.8865 -1.8172 0.150 0 0 7.1668</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_5">
+      <static>true</static>
+      <pose>4.9410 -1.7357 0.150 0 0 7.3631</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_6">
+      <static>true</static>
+      <pose>4.9785 -1.6451 0.150 0 0 7.5595</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="outer_corner_br_7">
+      <static>true</static>
+      <pose>4.9976 -1.5490 0.150 0 0 7.7558</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.1002 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_top">
+      <static>true</static>
+      <pose>2.5000 1.2500 0.150 0 0 0.0000</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_bottom">
+      <static>true</static>
+      <pose>2.5000 -1.2500 0.150 0 0 0.0000</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>3.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_left">
+      <static>true</static>
+      <pose>0.7500 0.0000 0.150 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>2.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>2.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_right">
+      <static>true</static>
+      <pose>4.2500 0.0000 0.150 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>2.0000 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>2.0000 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_0">
+      <static>true</static>
+      <pose>0.9755 1.2488 0.150 0 0 3.2398</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_1">
+      <static>true</static>
+      <pose>0.9274 1.2392 0.150 0 0 3.4361</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_2">
+      <static>true</static>
+      <pose>0.8822 1.2205 0.150 0 0 3.6325</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_3">
+      <static>true</static>
+      <pose>0.8414 1.1933 0.150 0 0 3.8288</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_4">
+      <static>true</static>
+      <pose>0.8067 1.1586 0.150 0 0 4.0252</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_5">
+      <static>true</static>
+      <pose>0.7795 1.1178 0.150 0 0 4.2215</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_6">
+      <static>true</static>
+      <pose>0.7608 1.0726 0.150 0 0 4.4179</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tl_7">
+      <static>true</static>
+      <pose>0.7512 1.0245 0.150 0 0 4.6142</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_0">
+      <static>true</static>
+      <pose>4.2488 1.0245 0.150 0 0 1.6690</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_1">
+      <static>true</static>
+      <pose>4.2392 1.0726 0.150 0 0 1.8653</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_2">
+      <static>true</static>
+      <pose>4.2205 1.1178 0.150 0 0 2.0617</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_3">
+      <static>true</static>
+      <pose>4.1933 1.1586 0.150 0 0 2.2580</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_4">
+      <static>true</static>
+      <pose>4.1586 1.1933 0.150 0 0 2.4544</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_5">
+      <static>true</static>
+      <pose>4.1178 1.2205 0.150 0 0 2.6507</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_6">
+      <static>true</static>
+      <pose>4.0726 1.2392 0.150 0 0 2.8471</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_tr_7">
+      <static>true</static>
+      <pose>4.0245 1.2488 0.150 0 0 3.0434</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_0">
+      <static>true</static>
+      <pose>0.7512 -1.0245 0.150 0 0 4.8106</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_1">
+      <static>true</static>
+      <pose>0.7608 -1.0726 0.150 0 0 5.0069</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_2">
+      <static>true</static>
+      <pose>0.7795 -1.1178 0.150 0 0 5.2033</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_3">
+      <static>true</static>
+      <pose>0.8067 -1.1586 0.150 0 0 5.3996</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_4">
+      <static>true</static>
+      <pose>0.8414 -1.1933 0.150 0 0 5.5960</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_5">
+      <static>true</static>
+      <pose>0.8822 -1.2205 0.150 0 0 5.7923</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_6">
+      <static>true</static>
+      <pose>0.9274 -1.2392 0.150 0 0 5.9887</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_bl_7">
+      <static>true</static>
+      <pose>0.9755 -1.2488 0.150 0 0 6.1850</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_0">
+      <static>true</static>
+      <pose>4.0245 -1.2488 0.150 0 0 6.3814</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_1">
+      <static>true</static>
+      <pose>4.0726 -1.2392 0.150 0 0 6.5777</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_2">
+      <static>true</static>
+      <pose>4.1178 -1.2205 0.150 0 0 6.7741</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_3">
+      <static>true</static>
+      <pose>4.1586 -1.1933 0.150 0 0 6.9704</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_4">
+      <static>true</static>
+      <pose>4.1933 -1.1586 0.150 0 0 7.1668</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_5">
+      <static>true</static>
+      <pose>4.2205 -1.1178 0.150 0 0 7.3631</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_6">
+      <static>true</static>
+      <pose>4.2392 -1.0726 0.150 0 0 7.5595</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="inner_corner_br_7">
+      <static>true</static>
+      <pose>4.2488 -1.0245 0.150 0 0 7.7558</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </visual>
+        <collision name="c">
+          <geometry><box><size>0.0511 0.0500 0.300</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf>

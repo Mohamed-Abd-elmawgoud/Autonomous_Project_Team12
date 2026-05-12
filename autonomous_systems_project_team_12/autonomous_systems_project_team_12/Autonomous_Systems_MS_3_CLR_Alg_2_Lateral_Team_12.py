@@ -20,7 +20,7 @@ class StanleyController(Node):
 
         self.k_p = self.get_parameter("k_p").value
         self.max_steering = self.get_parameter("max_steering").value
-        self.target_lateral_pos = self.get_parameter("target_lateral_pos").value
+        # self.target_lateral_pos = self.get_parameter("target_lateral_pos").value
         self.lane_heading = self.get_parameter("lane_heading").value
 
         # ---------------- STATE ----------------
@@ -32,6 +32,14 @@ class StanleyController(Node):
         # ---------------- IO ----------------
         self.pub = self.create_publisher(Float64, "/steering_angle", 10)
         self.create_subscription(Odometry, "/odom", self.cb, 10)
+          # Subscriber: odometry — gives body_link speed in m/s directly
+        self.desired_lane_subscriber = self.create_subscription(
+            Float64,
+            "/desired_lane",
+            self.desired_lane_callback,
+            10
+        )
+
 
         self.get_logger().info("Stanley FIXED started")
 
@@ -51,6 +59,9 @@ class StanleyController(Node):
         self.speed = msg.twist.twist.linear.x
 
         self.compute()
+
+    def desired_lane_callback(self, msg: Float64):
+        self.target_lateral_pos = msg.data
 
     # =========================================================
     # STANLEY CONTROL

@@ -1,34 +1,3 @@
-"""
-APF City Track Planner — Team 12
-=================================
-Implements an Artificial Potential Field planner for a rectangular loop track.
-
-Track geometry (from SDF, all in metres):
-  Outer walls:  x ∈ [0, 5],  y ∈ [-2, 2]  (with r≈0.5 m rounded corners)
-  Inner walls:  x ∈ [0.75, 4.25],  y ∈ [-1.25, 1.25]  (with r≈0.25 m corners)
-  Centreline:   x ∈ [0.375, 4.625], y ∈ [-1.625, 1.625]
-
-The planner drives the car counter-clockwise around the loop:
-  Waypoints (centreline): TL → TR → BR → BL → TL …
-
-Controller selection strategy
--------------------------------
-  STRAIGHT segments  →  Speed controller  (/desired_velocity)
-  CORNER  segments   →  Waypoint P2P controller  (/goal_point)
-
-Both heading and goal are always published so the Stanley lateral controller
-always has something to track.
-
-Published topics
-----------------
-  /goal_point        (geometry_msgs/Point)   – next waypoint
-  /desired_velocity  (std_msgs/Float64)      – target speed for speed ctrl
-  /desired_heading   (std_msgs/Float64)      – path tangent angle (radians)
-
-Subscribed topics
------------------
-  /odom              (nav_msgs/Odometry)     – robot pose & velocity
-"""
 
 import math
 import rclpy
